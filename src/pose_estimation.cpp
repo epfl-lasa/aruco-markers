@@ -1,24 +1,45 @@
+#include <opencv2/highgui.hpp>
 #include <opencv2/opencv.hpp>
 #include <opencv2/aruco.hpp>
-#include "ros/ros.h"
-#include "geometry_msgs/PoseStamped.h"
+#include <iostream>
+#include <ros/ros.h>
+#include <ros/package.h>
+#include <geometry_msgs/PoseStamped.h>
 
+using namespace std;
+using namespace cv;
 
-int main(int argc, char **argv)
+namespace {
+const char* about = "Pose estimation of aruco markers\n";
+const char* keys  =
+        "{l        |       | Real length of the aruco markers (in m) }"
+        "{c        |       | Id of the camera as it appears in /dev/video* }";
+}
+
+int main(int argc, char *argv[])
 {
+    CommandLineParser parser(argc, argv, keys);
+    parser.about(about);
+
+    if(argc < 3) {
+        parser.printMessage();
+        return 0;
+    }
+
     ros::init(argc, argv, "marker_poses_publisher");
     ros::NodeHandle n;
     ros::Publisher pub = n.advertise<geometry_msgs::PoseStamped>("/camera/marker_poses", 1000);
 
     int wait_time = 10;
-    float actual_marker_length = 0.04;  // this should be in meters
+    float actual_marker_length = parser.get<int>("l");
+    int camera_id = parser.get<int>("c");
 
     cv::Mat image, image_copy;
     cv::Mat camera_matrix, dist_coeffs;
     std::ostringstream vector_to_marker;
     
     cv::VideoCapture in_video;
-    in_video.open(0);
+    in_video.open(camera_id);
     cv::Ptr<cv::aruco::Dictionary> dictionary = 
         cv::aruco::getPredefinedDictionary(cv::aruco::DICT_ARUCO_ORIGINAL);
     
@@ -31,7 +52,7 @@ int main(int argc, char **argv)
     std::cout << "camera_matrix\n" << camera_matrix << std::endl;
     std::cout << "\ndist coeffs\n" << dist_coeffs << std::endl;
 
-    while (in_video.grab()) 
+    while (in_video.grab() && ros::ok()) 
     {
 
         in_video.retrieve(image);

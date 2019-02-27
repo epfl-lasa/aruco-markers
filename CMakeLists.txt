@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
   roscpp
   sensor_msgs
+  roslib
 )
 
 ## System dependencies are found with CMake's conventions
@@ -27,7 +28,7 @@ find_package(OpenCV REQUIRED)
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
    #INCLUDE_DIRS include
-   CATKIN_DEPENDS geometry_msgs roscpp sensor_msgs
+   CATKIN_DEPENDS geometry_msgs roscpp sensor_msgs roslib
    DEPENDS OpenCV
 )
 
