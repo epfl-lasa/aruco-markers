@@ -1,0 +1,10 @@
+<launch>
+  <arg name="id"/>
+  <arg name="d" default="16"/>
+  <arg name="ms" default="400"/>
+  <arg name="bb" default="1"/>
+  <arg name="si" default="false"/>
+  <arg name="output" default="$(eval find('aruco_markers') + '/markers/marker' + str(arg('id')) + '.jpg')"/>
+
+  <node name="create_marker" pkg="aruco_markers" type="create_marker" args="-bb=$(arg bb) -d=$(arg d) -ms=$(arg ms) -si=$(arg si) -id=$(arg id) $(arg output)"/>
+</launch>

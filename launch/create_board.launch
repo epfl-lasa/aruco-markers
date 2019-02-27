@@ -1,0 +1,12 @@
+<launch>
+  <arg name="h" default="2"/>
+  <arg name="w" default="4"/>
+  <arg name="d" default="16"/>
+  <arg name="l" default="200"/>
+  <arg name="s" default="100"/>
+  <arg name="bb" default="1"/>
+  <arg name="si" default="false"/>
+  <arg name="output" default="$(find aruco_markers)/markers/default_board.jpg"/>
+
+  <node name="create_board" pkg="aruco_markers" type="create_board" args="-bb=$(arg bb) -h=$(arg h) -w=$(arg w) -l=$(arg l) -s=$(arg s) -d=$(arg d) -si=$(arg si) $(arg output)"/>
+</launch>
