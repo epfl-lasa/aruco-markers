@@ -1,0 +1,6 @@
+<launch>
+  <arg name="l"/>
+  <arg name="ci" default="0"/>
+
+  <node name="pose_publisher" pkg="aruco_markers" type="pose_estimation" args="-l=$(arg l) -ci=$(arg ci)"/>
+</launch>

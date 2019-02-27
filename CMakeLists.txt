@@ -8,9 +8,8 @@ project(aruco_markers)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  geometry_msgs
+  tf
   roscpp
-  sensor_msgs
   roslib
 )
 
@@ -28,7 +27,7 @@ find_package(OpenCV REQUIRED)
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
    #INCLUDE_DIRS include
-   CATKIN_DEPENDS geometry_msgs roscpp sensor_msgs roslib
+   CATKIN_DEPENDS roscpp tf roslib
    DEPENDS OpenCV
 )
 
