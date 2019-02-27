@@ -1,9 +1,15 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/aruco.hpp>
+#include "ros/ros.h"
+#include "geometry_msgs/PoseStamped.h"
 
 
 int main(int argc, char **argv)
 {
+    ros::init(argc, argv, "marker_poses_publisher");
+    ros::NodeHandle n;
+    ros::Publisher pub = n.advertise<geometry_msgs::PoseStamped>("/camera/marker_poses", 1000);
+
     int wait_time = 10;
     float actual_marker_length = 0.04;  // this should be in meters
 
@@ -16,7 +22,8 @@ int main(int argc, char **argv)
     cv::Ptr<cv::aruco::Dictionary> dictionary = 
         cv::aruco::getPredefinedDictionary(cv::aruco::DICT_ARUCO_ORIGINAL);
     
-    cv::FileStorage fs("../../calibration_params.yml", cv::FileStorage::READ);
+    std::string path = ros::package::getPath("aruco_markers");
+    cv::FileStorage fs(path + "config/calibration_params.yml", cv::FileStorage::READ);
 
     fs["camera_matrix"] >> camera_matrix;
     fs["distortion_coefficients"] >> dist_coeffs;
