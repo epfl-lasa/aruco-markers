@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>aruco-markers</name>
+  <name>aruco_markers</name>
   <version>0.0.0</version>
   <description>The aruco-markers package</description>
 

@@ -1,0 +1,15 @@
+<launch>
+  <arg name="h" default="2"/>
+  <arg name="w" default="4"/>
+  <arg name="l" default="200"/>
+  <arg name="s" default="2"/>
+  <arg name="d" default="16"/>
+  <arg name="ci" default="0"/>
+  <arg name="dp" default="$(find aruco_markers)/config/detector_params.yml"/>
+  <arg name="rs" default="false"/>
+  <arg name="zt" default="false"/>
+  <arg name="pc" default="false"/>
+  <arg name="output" default="$(find aruco_markers)/config/calibration_params.yml"/>
+
+  <node name="camera_calibration" pkg="aruco_markers" type="camera_calibration" args="-h=$(arg h) -w=$(arg w) -l=$(arg l) -s=$(arg s) -d=$(arg d) -ci=$(arg ci) -dp=$(arg dp) -rs=$(arg rs) -zt=$(arg zt) -pc=$(arg pc) $(arg output)"/>
+</launch>
