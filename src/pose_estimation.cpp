@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
                 transform.setOrigin( tf::Vector3(tvecs[i][0], tvecs[i][1], tvecs[i][2]) );
                 double alpha = sqrt(pow(rvecs[i][0], 2) + pow(rvecs[i][1], 2) + pow(rvecs[i][2], 2));
                 transform.setRotation( tf::Quaternion(rvecs[i][0] / alpha * sin(alpha/2), rvecs[i][1] / alpha * sin(alpha/2), rvecs[i][2] / alpha * sin(alpha/2), cos(alpha/2)) );
-                br.sendTransform( tf::StampedTransform(transform, ros::Time::now(), "camera" + to_string(camera_id), to_string(ids[i])) );
+                br.sendTransform( tf::StampedTransform(transform, ros::Time::now(), "camera/" + to_string(camera_id), "marker/" + to_string(ids[i])) );
 
                 vector_to_marker.str(std::string());
                 vector_to_marker << std::setprecision(4) 
