@@ -8,5 +8,5 @@
   <arg name="si" default="false"/>
   <arg name="output" default="$(find aruco_markers)/markers/default_board.jpg"/>
 
-  <node name="create_board" pkg="aruco_markers" type="create_board" args="-bb=$(arg bb) -h=$(arg h) -w=$(arg w) -l=$(arg l) -s=$(arg s) -d=$(arg d) -si=$(arg si) $(arg output)"/>
+  <node name="create_board" pkg="aruco_markers" type="create_board" args="-bb=$(arg bb) -h=$(arg h) -w=$(arg w) -l=$(arg l) -s=$(arg s) -d=$(arg d) -si=$(arg si) $(arg output)" required="true"/>
 </launch>
