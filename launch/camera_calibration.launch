@@ -11,5 +11,5 @@
   <arg name="pc" default="false"/>
   <arg name="output" default="$(find aruco_markers)/config/calibration_params.yml"/>
 
-  <node name="camera_calibration" pkg="aruco_markers" type="camera_calibration" args="-h=$(arg h) -w=$(arg w) -l=$(arg l) -s=$(arg s) -d=$(arg d) -ci=$(arg ci) -dp=$(arg dp) -rs=$(arg rs) -zt=$(arg zt) -pc=$(arg pc) $(arg output)"/>
+  <node name="camera_calibration" pkg="aruco_markers" type="camera_calibration" args="-h=$(arg h) -w=$(arg w) -l=$(arg l) -s=$(arg s) -d=$(arg d) -ci=$(arg ci) -dp=$(arg dp) -rs=$(arg rs) -zt=$(arg zt) -pc=$(arg pc) $(arg output)" required="true"/>
 </launch>

@@ -6,5 +6,5 @@
   <arg name="si" default="false"/>
   <arg name="output" default="$(eval find('aruco_markers') + '/markers/marker' + str(arg('id')) + '.jpg')"/>
 
-  <node name="create_marker" pkg="aruco_markers" type="create_marker" args="-bb=$(arg bb) -d=$(arg d) -ms=$(arg ms) -si=$(arg si) -id=$(arg id) $(arg output)"/>
+  <node name="create_marker" pkg="aruco_markers" type="create_marker" args="-bb=$(arg bb) -d=$(arg d) -ms=$(arg ms) -si=$(arg si) -id=$(arg id) $(arg output)" required="true"/>
 </launch>
