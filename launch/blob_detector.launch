@@ -1,0 +1,5 @@
+<launch>
+  <arg name="ci" default="1"/>
+  <env name="ROSCONSOLE_CONFIG_FILE" value="$(find aruco_markers)/config/custom_rosconsole.conf"/>
+  <node name="blob_detector" pkg="aruco_markers" type="blob_detection" output="screen" args="-ci=$(arg ci)"/>
+</launch>

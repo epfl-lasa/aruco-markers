@@ -51,6 +51,7 @@ add_executable(${PROJECT_NAME}_create_board src/create_board.cpp)
 add_executable(${PROJECT_NAME}_create_marker src/create_marker.cpp)
 add_executable(${PROJECT_NAME}_detect_marker src/detect_marker.cpp)
 add_executable(${PROJECT_NAME}_pose_estimation src/pose_estimation.cpp)
+add_executable(${PROJECT_NAME}_blob_detection src/blob_detection.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -61,6 +62,7 @@ set_target_properties(${PROJECT_NAME}_create_board PROPERTIES OUTPUT_NAME create
 set_target_properties(${PROJECT_NAME}_create_marker PROPERTIES OUTPUT_NAME create_marker PREFIX "")
 set_target_properties(${PROJECT_NAME}_detect_marker PROPERTIES OUTPUT_NAME detect_marker PREFIX "")
 set_target_properties(${PROJECT_NAME}_pose_estimation PROPERTIES OUTPUT_NAME pose_estimation PREFIX "")
+set_target_properties(${PROJECT_NAME}_blob_detection PROPERTIES OUTPUT_NAME blob_detection PREFIX "")
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
@@ -69,6 +71,7 @@ add_dependencies(${PROJECT_NAME}_create_board ${${PROJECT_NAME}_EXPORTED_TARGETS
 add_dependencies(${PROJECT_NAME}_create_marker ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(${PROJECT_NAME}_detect_marker ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(${PROJECT_NAME}_pose_estimation ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(${PROJECT_NAME}_blob_detection ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}_camera_calibration
@@ -92,6 +95,11 @@ target_link_libraries(${PROJECT_NAME}_detect_marker
 )
 
 target_link_libraries(${PROJECT_NAME}_pose_estimation
+   ${catkin_LIBRARIES}
+   ${OpenCV_LIBRARIES}
+)
+
+target_link_libraries(${PROJECT_NAME}_blob_detection
    ${catkin_LIBRARIES}
    ${OpenCV_LIBRARIES}
 )
