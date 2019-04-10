@@ -144,9 +144,9 @@ int main(int argc, char *argv[])
         image.copyTo(image_copy_bis);
         //Green
         inRange(image_copy_bis, Scalar(30,81,40), Scalar(75,181,140), segmented_image_green); //Green cube //B,G,R
-        erode(segmented_image_green, segmented_image_green_filtered, Mat(), Point(-1, -1), 2, 1 , 1);
-        findContours( segmented_image_green_filtered, contours_green, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE, Point(0, 0) );
-        Mat drawing(segmented_image_green_filtered.size(), CV_8UC3, Scalar(255,255,255));
+        //erode(segmented_image_green, segmented_image_green_filtered, Mat(), Point(-1, -1), 2, 1 , 1);
+        findContours( segmented_image_green, contours_green, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE, Point(0, 0) );
+        Mat drawing(segmented_image_green.size(), CV_8UC3, Scalar(255,255,255));
 
         //Find biggest contour
         for( int i = 0; i< contours_green.size(); i++ ) // iterate through each contour. 
@@ -178,8 +178,8 @@ int main(int argc, char *argv[])
 
         //Blue
         inRange(image_copy_bis, Scalar(60,20,6), Scalar(180,100,70), segmented_image_blue); //Blue cube
-        erode(segmented_image_blue, segmented_image_blue_filtered, Mat(), Point(-1, -1), 2, 1 , 1);
-        findContours( segmented_image_blue_filtered, contours_blue, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE, Point(0, 0) );
+        //erode(segmented_image_blue, segmented_image_blue_filtered, Mat(), Point(-1, -1), 2, 1 , 1);
+        findContours( segmented_image_blue, contours_blue, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE, Point(0, 0) );
         
         for( int i = 0; i< contours_blue.size(); i++ ) // iterate through each contour. 
         {

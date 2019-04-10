@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
     int wait_time = 10;
     //ROS_DEBUG("hello");
 
-	cv::Mat image, image_copy;
+	cv::Mat image, image_copy, image_copy2;
     cv::Mat camera_matrix, dist_coeffs;
     
     int camera_id = parser.get<int>("ci");
@@ -113,12 +113,14 @@ int main(int argc, char *argv[])
         //GREEN
         inRange(image_copy, Scalar(30,81,40), Scalar(75,181,140), segmented_image_green); //Green cube //B,G,R
         //inRange(image_copy, Scalar(41,109,83), Scalar(75,181,140), segmented_image_green); //Green cube //B,G,R
-        erode(segmented_image_green, segmented_image_green_filtered, Mat(), Point(-1, -1), 2, 1 , 1);
-        findContours( segmented_image_green_filtered, contours_green, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE, Point(0, 0) );
-        Mat drawing(segmented_image_green_filtered.size(), CV_8UC3, Scalar(255,255,255));
+        //erode(segmented_image_green, segmented_image_green_filtered, Mat(), Point(-1, -1), 2, 1 , 1); 
+        // findContours( segmented_image_green_filtered, contours_green, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE, Point(0, 0) ); 
+        findContours( segmented_image_green, contours_green, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE, Point(0, 0) ); 
+        // Mat drawing(segmented_image_green_filtered.size(), CV_8UC3, Scalar(255,255,255)); 
+        Mat drawing(segmented_image_green.size(), CV_8UC3, Scalar(255,255,255)); 
         //Find biggest contour
 
-        for( int i = 0; i< contours_green.size(); i++ ) // iterate through each contour. 
+        for( int i = 0; i< contours_green.size(); i++ ) // iterate through each contour.
         {
             double a=contourArea( contours_green[i],false);  //  Find the area of contour
             if(a>largest_area_green)
@@ -135,7 +137,7 @@ int main(int argc, char *argv[])
         // {
         //     mu_green[i] = moments( contours_green[i], false ); 
         // }
-        
+         
         Moments mu_green;
 
         if (!contours_green.empty() && largest_area_green > 200)
@@ -156,24 +158,32 @@ int main(int argc, char *argv[])
         }
         
          // get the centroid of figures.
-        //vector<Point2f> mc_green(contours_green.size());
+        // vector<Point2f> mc_green(contours_green.size());
         
-        //Point2f center;
+        // Point2f center;
 
         // for( int i = 0; i< contours_green.size(); i++ ) // iterate through each contour. 
         // {
         //     mc_green[i] = Point2f( mu_green[i].m10/mu_green[i].m00 , mu_green[i].m01/mu_green[i].m00 ); 
+        // }
+
+        // for ( int i = 0; i< contours_green.size(); i++ )
+        // {
+        //     drawContours(drawing, contours_green, i, color_green, 2, 8, hierarchy, 0, Point());
+        //     circle(drawing, mc_green[i], 4, color_green, -1, 8, 0);
         // }        
 
-        
+        // namedWindow("Contours", CV_WINDOW_AUTOSIZE); 
+        // imshow("Contours", drawing); 
 
         //BLUE
 
         inRange(image_copy, Scalar(60,20,6), Scalar(180,100,70), segmented_image_blue); //Blue cube
-        erode(segmented_image_blue, segmented_image_blue_filtered, Mat(), Point(-1, -1), 2, 1 , 1);
-        findContours( segmented_image_blue_filtered, contours_blue, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE, Point(0, 0) );
+        // erode(segmented_image_blue, segmented_image_blue_filtered, Mat(), Point(-1, -1), 2, 1 , 1); la
+        // findContours( segmented_image_blue_filtered, contours_blue, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE, Point(0, 0) ); 
+        findContours( segmented_image_blue, contours_blue, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE, Point(0, 0) ); 
         
-        for( int i = 0; i< contours_blue.size(); i++ ) // iterate through each contour. 
+        for( int i = 0; i< contours_blue.size(); i++ ) // iterate through each contour. la (tout le for)
         {
             double a=contourArea( contours_blue[i],false);  //  Find the area of contour
             if(a>largest_area_blue)
@@ -190,6 +200,7 @@ int main(int argc, char *argv[])
         // // {
         // //     mu_blue[i] = moments( contours_blue[i], false ); 
         // // }
+            
         if (!contours_blue.empty() && largest_area_blue > 200)
         {
             Moments mu_blue;
@@ -216,10 +227,10 @@ int main(int argc, char *argv[])
         // }
 
          // B G R values
-        cout << "green";
-        cout << largest_area_green;
-        cout << "blue";
-        cout << largest_area_blue;
+        // cout << "green";
+        // cout << largest_area_green;
+        // cout << "blue";
+        // cout << largest_area_blue;
         namedWindow("Contours", CV_WINDOW_AUTOSIZE);
         imshow("Contours", drawing);
 
