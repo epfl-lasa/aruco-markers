@@ -144,7 +144,7 @@ int main(int argc, char *argv[])
         image.copyTo(image_copy_bis);
         //Green
         inRange(image_copy_bis, Scalar(30,81,40), Scalar(75,181,140), segmented_image_green); //Green cube //B,G,R
-        //erode(segmented_image_green, segmented_image_green_filtered, Mat(), Point(-1, -1), 2, 1 , 1);
+        // inRange(image_copy_bis, Scalar(50,90,70), Scalar(75,120,90), segmented_image_green); 
         findContours( segmented_image_green, contours_green, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE, Point(0, 0) );
         Mat drawing(segmented_image_green.size(), CV_8UC3, Scalar(255,255,255));
 
@@ -161,7 +161,7 @@ int main(int argc, char *argv[])
         
         Moments mu_green;
 
-        if (!contours_green.empty() && largest_area_green >= 200 && largest_area_green < 3300)
+        if (!contours_green.empty() && largest_area_green >= 1400 && largest_area_green < 3300)
         {
       
             mu_green = moments(contours_green[largest_contour_index_green], false );
@@ -178,7 +178,7 @@ int main(int argc, char *argv[])
 
         //Blue
         inRange(image_copy_bis, Scalar(60,20,6), Scalar(180,100,70), segmented_image_blue); //Blue cube
-        //erode(segmented_image_blue, segmented_image_blue_filtered, Mat(), Point(-1, -1), 2, 1 , 1);
+        // inRange(image_copy_bis, Scalar(90,80,50), Scalar(135,105,80), segmented_image_blue); 
         findContours( segmented_image_blue, contours_blue, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE, Point(0, 0) );
         
         for( int i = 0; i< contours_blue.size(); i++ ) // iterate through each contour. 
@@ -192,7 +192,7 @@ int main(int argc, char *argv[])
   
         }
 
-        if (!contours_blue.empty() && largest_area_blue >= 200 && largest_area_blue <= 3300)
+        if (!contours_blue.empty() && largest_area_blue >= 1400 && largest_area_blue <= 3300)
         {
             Moments mu_blue;
             mu_blue = moments(contours_blue[largest_contour_index_blue], false );
